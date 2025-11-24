@@ -569,15 +569,200 @@ setTimeout(function(){
 
 /*
 
-🔥 How to create a promise ??
+🔥 How to create a promise ??  |state||value| ==> property of Promise
 
 👀 creation of a promise object is sync in nature.
 
-👉 1)pending
-👉 2)fulfilled
-👉 3)rejected
+    😜 state😜
+        ||
+👉 1)pending ==> when we create a new promise object 
+                this is the default state.It represents
+                work in progress.
+
+                                        ==> fulfilled (value => argument of resolve)
+        😈 (value => undefined) pending |
+                                        ==> rejected (value => )
+
+👉 2)fulfilled ==> if the operation is completed successfully.
+
+
+👉 3)rejected ==> if operation was not successfull.
 
 */
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->321⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+
+🔥 obj={x:10,y:20}
+
+😈 keyword==>(new)
+
+😈 (Promise) ==> Constructor
+
+🔥 new Promise (f) ==> this constructor expects a callback
+
+🔥 callback (f) ===> executor function
+
+❤️.                    |. ==> resove,reject => these are functions (inbuilt)  |
+
+🔥 new Promise(function(resolve,reject){
+
+    // inside this function we can write our time consuming task 
+})
+
+🔥 whenever in the implementation of executor callback,you call the resolve function,the promise
+   goes to a fulfilled state.
+
+🔥 if you call the reject function,it goes to a rejected state.
+
+🔥 and if you don't call anything,Promise remains in pending state.
+
+
+🔥 with whatever argument we call resolve or reject with, gets assigned to the value property.
+
+
+
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->323(Trying Promises)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function getRandomInt(maxLimit){
+    return Math.floor(Math.random()*maxLimit);
+}
+
+function createPromiseWithLoop(){
+    return new Promise(
+        function executor(resolve,reject){
+            for(let i=0;i<10000000;i++){}
+            const num=getRandomInt(10);
+
+            if(num%2==0){
+                // if the random number is even we fullfill
+                resolve(num);
+
+            }else{
+                // if the random number is odd we reject
+                reject(num);
+            }
+
+    });
+}
+
+
+const x=createPromiseWithLoop();
+
+console.log(x);
+*/
+
+/*
+
+function getRandomInt(maxLimit){
+    return Math.floor(Math.random()*maxLimit);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(
+        function executor(resolve,reject){
+            setTimeout(
+                function(){
+                    const num=getRandomInt(10);
+        
+                    if(num%2==0){
+                        // if the random number is even we fullfill
+                        resolve(num,10,20);
+        
+                    }else{
+                        // if the random number is odd we reject
+                        reject(num);
+                    }
+                },5000);
+                });
+}
+
+
+const y=createPromiseWithTimeout();
+
+console.log(y);
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->325⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function getRandomInt(maxLimit){
+    return Math.floor(Math.random()*maxLimit);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(
+        function executor(resolve,reject){
+            setTimeout(
+                function(){
+                    const num=getRandomInt(10);
+        
+                    if(num%2==0){
+                        // if the random number is even we fullfill
+                        console.log("fulfilling");
+                        return num;
+        
+                    }else{
+                        // if the random number is odd we reject
+                        console.log("rejecting");
+                        return num;
+                    }
+                },5000);
+                });
+}
+
+
+const y=createPromiseWithTimeout();
+
+console.log(y);
+*/
+
+
+/*
+function getRandomInt(maxLimit){
+    return Math.floor(Math.random()*maxLimit);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(
+        function executor(resolve,reject){
+            setTimeout(
+                function(){
+                    const num=getRandomInt(10);
+        
+                    if(num%2==0){
+                        // if the random number is even we fullfill
+                        console.log("fulfilling");
+                        resolve(num);
+                        console.log("resolving again!");
+                        resolve(num);
+        
+                    }else{
+                        // if the random number is odd we reject
+                        console.log("rejecting");
+                        reject(num);
+                        console.log("rejecting again");
+                        reject(num);
+                    }
+                },5000);
+                });
+}
+
+
+const y=createPromiseWithTimeout();
+
+console.log(y);
+
+*/
+
+
+
+
+
 
 
 
