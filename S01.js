@@ -759,8 +759,233 @@ console.log(y);
 
 */
 
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->326⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+
+🔥 At the time when the constructor generates a new Promise
+    object,it also generates a pair of function,called as
+    resolve & reject.
+
+🔥 Generally the executor callback,wraps some async/sync
+   operations.
+
+🔥 the executor is called sync.
+
+*/
 
 
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->327(Consuming a promise)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+
+function getRandomInt(max){
+    return Math.floor(Math.random()*max);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(function executor(resolve,reject){
+        console.log("Entering the executor callback in the Promise constructor");
+        setTimeout(function(){
+            let num=getRandomInt(10);
+            if (num%2==0){
+                // if the random number is even we fulfill
+                resolve(num);
+            }else{
+                // if the random number is odd we reject
+                reject(num);
+            }
+        },10000);
+        console.log("Existing the executor callback in the Promise constructor");
+
+    });
+}
+
+console.log("Starting......");
+
+const p=createPromiseWithTimeout();
+
+console.log("We are now waiting for the promise to complete");
+
+console.log("currently my promise object is like .... ",p);
+
+p.
+then(
+    function fulfillHandler(value){
+        console.log("Inside fulfill handler with value",value);
+        console.log("Promise after fulfillment is",p);
+    },
+    function rejectionHandler(value){
+        console.log("Inside rejection handler with value",value);
+        console.log("Promise after rejection is",p);
+    }
+);
+
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->329⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function createPromise(){
+    return new Promise(function execute(resolve,reject){
+        let x=setTimeout(function getValue(){ 
+            // here x contain id of setTimeout
+            return 2;
+        },1000);
+        if(x%2==0){
+            resolve("successfull");
+        }else{
+            reject("rejected");
+        }
+    });
+}
+
+const p=createPromise();
+
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->332⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+
+function getRandomInt(max){
+    return Math.floor(Math.random()*max);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(function executor(resolve,reject){
+        console.log("Entering the executor callback in the Promise constructor");
+        setTimeout(function(){
+            let num=getRandomInt(10);
+            if (num%2==0){
+                // if the random number is even we fulfill
+                resolve(num);
+            }else{
+                // if the random number is odd we reject
+                reject(num);
+            }
+        },1000);
+        console.log("Existing the executor callback in the Promise constructor");
+
+    });
+}
+
+console.log("Starting......");
+
+const p=createPromiseWithTimeout();
+
+console.log("We are now waiting for the promise to complete");
+
+console.log("currently my promise object is like .... ",p);
+
+console.log("Going to register my 1st set of handlers");
+
+p.
+then(
+    function fulfillHandler(value){
+        console.log("Inside fulfill handler 1 with value",value);
+        console.log("Promise after fulfillment 1 is",p);
+    },
+    function rejectionHandler(value){
+        console.log("Inside rejection handler 1 with value",value);
+        console.log("Promise after rejection 1 is",p);
+    }
+);
+
+console.log("Going to register my 2nd set of handlers");
+
+p.
+then(
+    function fulfillHandler1(value){
+        console.log("Inside fulfill handler 2 with value",value);
+        console.log("Promise after fulfillment 2 is",p);
+    },
+    function rejectionHandler2(value){
+        console.log("Inside rejection handler 2 with value",value);
+        console.log("Promise after rejection 2 is",p);
+    }
+);
+
+console.log("Ending..........");
+
+console.log("starting the loop");
+
+for(let i=0;i<100000000;i++){}
+
+console.log("Ending the loop also");
+
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->333⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function getRandomInt(max){
+    return Math.floor(Math.random()*max);
+}
+
+function createPromiseWithTimeout(){
+    return new Promise(function executor(resolve,reject){
+        console.log("Entering the executor callback in the Promise constructor");
+        setTimeout(function(){
+            let num=getRandomInt(10);
+            if (num%2==0){
+                // if the random number is even we fulfill
+                resolve(num);
+            }else{
+                // if the random number is odd we reject
+                reject(num);
+            }
+        },1000);
+        console.log("Existing the executor callback in the Promise constructor");
+
+    });
+}
+
+console.log("Starting......");
+
+const p=createPromiseWithTimeout();
+
+console.log("We are now waiting for the promise to complete");
+
+console.log("currently my promise object is like .... ",p);
+
+console.log("Going to register my 1st set of handlers");
+
+p.
+then(
+    function fulfillHandler(value){
+        console.log("Inside fulfill handler 1 with value",value);
+        console.log("Promise after fulfillment 1 is",p);
+        setTimeout(function t(){console.log("Ended 0sec timer")},0);
+        console.log("exiting the fulfillment handler 1");
+    },
+    function rejectionHandler(value){
+        console.log("Inside rejection handler 1 with value",value);
+        console.log("Promise after rejection 1 is",p);
+        setTimeout(function t(){console.log("Ended 0sec timer")},0);
+        console.log("exiting the rejection handler 1");
+    }
+);
+
+console.log("Going to register my 2nd set of handlers");
+
+p.
+then(
+    function fulfillHandler1(value){
+        console.log("Inside fulfill handler 2 with value",value);
+        console.log("Promise after fulfillment 2 is",p);
+    },
+    function rejectionHandler2(value){
+        console.log("Inside rejection handler 2 with value",value);
+        console.log("Promise after rejection 2 is",p);
+    }
+);
+
+console.log("Ending..........");
+
+setTimeout(function(){console.log("Global timer of 0sec");},1000);
+
+*/
 
 
 
