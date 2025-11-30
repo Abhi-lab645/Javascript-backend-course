@@ -988,16 +988,269 @@ setTimeout(function(){console.log("Global timer of 0sec");},1000);
 */
 
 
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->335(Understanding microstack queue)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function createPromise(){
+    return new Promise(function exec(resolve,reject){
+        console.log("Resolving the promise");
+        resolve("Done");
+    });
+}
+
+
+setTimeout(function process(){
+    console.log("Timer completed");
+},0);
+
+const p=createPromise();
+
+p.
+then(
+    function fulfillHandler1(value){
+        console.log("we fulfilled1 with a value",value);
+    },
+    function rejectionHandler(){
+
+    }
+);
+
+p.
+then(
+    function fulfillHandler2(value){
+        console.log("we fulfilled2 with a value",value);
+    },
+    function rejectionHandler(){
+
+    }
+);
+
+p.
+then(
+    function fulfillHandler3(value){
+        console.log("we fulfilled3 with a value",value);
+    },
+    function rejectionHandler(){
+
+    }
+);
+
+p.
+then(
+    function fulfillHandler4(value){
+        console.log("we fulfilled4 with a value",value);
+    },
+    function rejectionHandler(){
+
+    }
+);
+
+for(let i=0;i<100000000;i++){}
+
+console.log("ending.....");
+
+*/
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->336⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function createPromise(){
+    return new Promise(function(resolve,reject){
+        setTimeout(function(){
+            console.log("rejecting the promise");
+            reject("Done");
+        },1000);
+    });
+}
+
+const p=createPromise();
+
+p.
+then(
+    function fulfillHandler1(value){
+        console.log("we fulfilled1 with a value",value);
+    },
+    function rejectionHandler1(value){
+        console.log("we reject1 with a value",value);
+    }
+);
+
+p.
+then(
+    function fulfillHandler2(value){
+        console.log("we fulfilled2 with a value",value);
+    },
+    function rejectionHandler2(value){
+        console.log("we reject2 with a value",value);
+    }
+);
+
+for(let i=0;i<1000000000;i++){}
+
+console.log("ending.......");
+
+*/
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->337⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+
+function fetchData(url){
+    return new Promise(function (resolve,reject){
+        console.log("Started downloading from",url);
+        setTimeout(function processDownloading(){
+            let data="Dummy data";
+            console.log("Download Completed");
+            resolve(data);
+        },7000);
+    });
+}
+
+
+console.log("Start.....");
+
+let promiseObj=fetchData("https://www.google.com")
+
+promiseObj.
+then(
+    function A(value){ // A ==> fulfillment handler 
+        console.log("value is",value);
+    }
+);
+
+console.log("end......");
+
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->338⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function fetchData(url){
+    return new Promise(function (resolve,reject){
+        console.log("Started downloading from",url);
+        setTimeout(function processDownloading(){
+            let data="Dummy data";
+            resolve(data);
+            console.log("Download Completed");
+        },7000);
+    });
+}
 
 
 
+console.log("Start.....");
+
+let promiseObj=fetchData("https://www.google.com")
+
+promiseObj.
+then(
+    function A(value){ // A ==> fulfillment handler 
+        console.log("value is",value);
+    }
+);
+
+console.log("end......");
+
+*/
 
 
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->341⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+console.log("Start of the file");
+
+setTimeout(function timer1(){
+    console.log("Timer 1 done");
+},0);
+
+for(let i=0;i<10000000000;i++){
+    // Something
+}
+
+let x=Promise.resolve("Abhinav's Promise");
+
+x.
+then(
+    function processPromise(value){
+    console.log("Whose promise ?",value);
+}
+);
+
+setTimeout(function timer2(){
+    console.log("Timer 2 done");
+},0);
+
+console.log("End of the file");
+*/
 
 
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->342⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function blockingForLoop(){
+    for(let i=0;i<1000000000;i++){
+        // something
+    }
+}
+
+console.log("start of the file");
+
+setTimeout(function timer1(){
+    console.log("Timer 1 done");
+},0);
+
+blockingForLoop();
+
+let x=Promise.resolve("Abhinav's Promise1");
+
+x.then(function processPromise(value){
+    console.log("Whose Promise ?",value);
+    blockingForLoop();
+});
+
+let y=Promise.resolve("Abhinav's Promise2");
+
+y.then(function processPromise(value){
+    console.log("Whose Promise ?",value);
+    setTimeout(function(){console.log("Ok done!");},0);
+});
+
+let z=Promise.resolve("Abhinav's Promise3");
+
+z.then(function processPromise(value){
+    console.log("Whose Promise ?",value);
+});
+
+setTimeout(function timer2(){
+    console.log("Timer 2 done");
+},0);
+
+console.log("End of the file");  
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->343(How Promises resolve issues of callbacks)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function download(url,cb){
+
+    console.log("Started downloading from url",url);
+
+    setTimeout(function exec(){
+        console.log("Completed downloading after 5 sec");
+        const content="ABCDEF";
+        // cb(content);
+        // cb(content);
+    },5000);
 
 
+}
 
+download("https://www.google.com",function processDownload(data){
+    console.log("downloaded data is",data);
+});
 
+*/
 
 
