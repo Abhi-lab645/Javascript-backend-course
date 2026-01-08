@@ -1253,4 +1253,230 @@ download("https://www.google.com",function processDownload(data){
 
 */
 
+/*
+function download(url){
+    console.log("started downloading content from",url);
+    return new Promise(function exec(res,rej){
+        setTimeout(function p(){
+            console.log("completed downloading data in 5s");
+            const content="ABCDEF";
+            res(content);
+        },5000);
+    });
+}
 
+const p=download("https://www.google.com");
+
+const x=p.
+then(
+    function fulfillHandler(value){
+        console.log("content downloaded is",value);
+        return "new Promise string"
+    },
+    function rejectionHandler(value){
+        console.log("rejected with",value);
+    }    
+);
+
+x.then(function fulfillHandler(value){
+    console.log("Value from chained then Promise:",value);
+});
+*/
+
+/*
+const p1=Promise.resolve("foo")
+const p2=
+p1.then((string)=>
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            string+="bar";
+            resolve(string);
+        },10000);
+    })
+)
+
+const p3=
+p2.then((string)=>{
+    setTimeout(()=>{
+        string+="baz";
+        console.log(string);// foobarbaz
+    },1);
+    return string;
+
+})
+
+const p4=
+p3.then((string)=>{
+    console.log(string);// foobar
+});
+*/
+
+/*
+
+┌───────────────┐
+│   Call Stack  │
+└───────┬───────┘
+        │
+        ▼
+┌─────────────────────┐
+│  Microtask Queue    │  ← Promises (.then)
+│  - then #1          │
+│  - then #2          │
+│  - then #3          │
+└───────┬─────────────┘
+        │
+        ▼
+┌─────────────────────┐
+│  Macrotask Queue    │  ← setTimeout
+│  - setTimeout 10s   │
+│  - setTimeout 1ms   │
+└───────┬─────────────┘
+        │
+        ▼
+     Event Loop
+*/
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->346⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+ 🔥 Tasks:🔥
+
+ 👉 1.write a function to download data from a URL
+
+ 👉 2.write a function to save that downloaded data into a file
+    and return the filename
+
+ 👉 3.write a function to upload the file written in previous
+    step to a newurl
+ */
+
+/*
+function downloadData(url,cb){
+    console.log("start downloading data from:",url);
+    setTimeout(() => {
+        const data="Abhinav";
+        console.log("Downloading completed.");
+        cb(data);
+        
+    }, 5000);
+}
+
+function writeDataToFile(data,cb){
+    console.log("Started writing a file with",data);
+    setTimeout(() => {
+        console.log("Completed writing the data into a file");
+        const filename="file.txt";
+        cb(filename);
+    }, 5000);
+}
+
+function uploadFile(url,file,cb){
+    console.log("Started uploading",file,"on",url);
+    setTimeout(() => {
+        console.log("upload completed");
+        const response="SUCCESS";
+        cb(response);
+    }, 2000);
+}
+
+*/
+
+// downloadData("www.google.com",function process(content){
+//     console.log("Downloaded data is:",content);
+// });
+
+// writeDataToFile("golu",function process(name){
+//     console.log("file written with name",name);
+// });
+
+// uploadFile("www.google.com","Abhi.txt",function process(status){
+//     console.log("upload status:",status);
+// });
+
+/*
+downloadData("www.xyz.com",function processDownload(content){
+    console.log("We are now going to process the downloaded data");
+    writeDataToFile(content,function processWrite(filename){
+        console.log("We have downloaded and written the file,now will upload");
+        uploadFile("www.upload.com",filename,function processUpload(response){
+            console.log("We have uploaded with",response);
+        });
+    });
+});
+*/
+
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->351⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+ 🔥 Tasks:🔥
+
+ 👉 1.write a function to download data from a URL
+
+ 👉 2.write a function to save that downloaded data into a file
+    and return the filename
+
+ 👉 3.write a function to upload the file written in previous
+    step to a newurl
+ */
+
+
+function downloadData(url){
+    return new Promise(function exec(resolve,reject){
+        console.log("start downloading data from:",url);
+
+        setTimeout(()=>{
+            const data="Abhinav";
+            console.log("Downloading Completed.");
+            resolve(data);
+        },8000);
+    });
+}
+
+
+
+function writeDataToFile(data){
+    return new Promise(function exec(resolve,reject){
+        console.log("Started writing a file with",data);
+
+        setTimeout(() => {
+            console.log("Completed writing the data into a file");
+            const filename="file.txt";
+           
+            resolve(filename);
+        }, 5000);
+    });
+}
+
+
+function uploadFile(url,file){
+    
+    return new Promise(function exec(resolve,reject){
+        console.log("Started uploading", file, "on", url)
+
+        setTimeout(()=>{
+            console.log("upload completed");
+            const response="SUCCESS";
+            resolve(response);
+        },2000);
+       
+    });
+}
+
+
+downloadData("www.xyz.com")
+
+.then((content)=>{
+    console.log("We are now going to process the downloaded data");
+    return writeDataToFile(content);
+})
+.then((filename)=>{
+    console.log("We have downloaded and written the file,now will upload");
+    return uploadFile("www.upload.com",filename);  
+})
+
+.then((response)=>{
+    console.log("We havde uploaded with",response);
+});
