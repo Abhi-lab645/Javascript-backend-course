@@ -1423,6 +1423,7 @@ downloadData("www.xyz.com",function processDownload(content){
  */
 
 
+/*
 function downloadData(url){
     return new Promise(function exec(resolve,reject){
         console.log("start downloading data from:",url);
@@ -1480,3 +1481,75 @@ downloadData("www.xyz.com")
 .then((response)=>{
     console.log("We havde uploaded with",response);
 });
+*/
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L->352(closures in JS) Date:17-Jan-2026⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/**
+  Remembering your context
+ */
+
+
+/*
+function process(){
+    let student="Abhinav";
+    let i=0;
+
+    function innerProcess(){
+        let profession="teaching";
+        i+=1
+        return [i,student,profession]
+    }
+
+    return innerProcess //we are not calling the function,we are just returning
+}
+
+let res=process();
+
+console.log(res);
+
+console.log("first time calling res",res());
+console.log("second time calling res",res());
+console.log("third time calling res",res());
+
+let obj={func:res}
+
+console.log(obj);
+
+console.log(obj.func())
+*/
+
+
+/*
+function Do(task){
+    setTimeout(function exec(){
+        console.log(task);
+    },2000);
+}
+
+Do("Solve physics problems")
+
+console.log("end");
+
+*/
+
+/*
+function process(){
+    let i=0;
+    let j=[1,2,3];
+    let k=10;
+    function innerProcess(){
+        i+=1
+        console.log(j);
+        return i; // we are not calling the function ,we are just returning
+    }
+    return innerProcess;
+}
+
+x=process()
+
+let obj={func:x}
+
+console.log(obj);
+*/
