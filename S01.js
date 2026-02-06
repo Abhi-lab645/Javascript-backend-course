@@ -1553,3 +1553,288 @@ let obj={func:x}
 
 console.log(obj);
 */
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L-354 (Introduction to iterators)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/**
+ 🔥 Types of Programming Language 🔥
+ 
+ 👉 1)Imperative ==> c,c++,java,javascript
+ 👉 2)Declarative ==> sql
+  
+ 🔥 In javascript
+  
+ 👀 arr=[1,2,3,4]
+ 👀 arr[2]
+  
+ 👉 here we actually,dedically define,the collection &
+    mention the steps to get data from the collection.
+ */
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L-355(Writing Iterators)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+
+/*
+
+function fetchNextElement(array){
+    let idx=0;
+    function next(){
+
+        if (idx==array.length){
+            return undefined;
+        }
+
+        const nextElement=array[idx];
+        idx++;
+        return nextElement;
+    }
+
+    return {next};
+}
+
+// Somewhere we consume it
+
+const automaticFetcher=fetchNextElement([99,11,12,13,0,1,2,3,4]);
+
+// inside automaticFetcher variable we can store (next) function
+
+console.log(automaticFetcher);
+
+console.log(automaticFetcher.next());
+console.log(automaticFetcher.next());
+console.log(automaticFetcher.next());
+console.log(automaticFetcher.next());
+console.log(automaticFetcher.next());
+
+*/
+
+
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️L-356(value and done in iterators)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+function createIterator(array){
+    let index=0;
+
+    function next(){
+        if (index<array.length){
+            return {
+                value:array[index++],
+                done:false
+            };
+        }else{
+            return{
+                value:undefined,
+                done:true
+            };
+        }
+    }
+    return {next}
+}
+
+const it=createIterator([10,20,30]);
+
+console.log(it);
+
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+*/
+
+
+
+
+/*
+const arr = ["A", "B", "C"];
+
+const iterator = arr[Symbol.iterator]();
+
+console.log(iterator);
+
+for(let ch of arr){
+    console.log(ch);
+}
+
+console.log(iterator.next()); // A
+console.log(iterator.next()); // B
+console.log(iterator.next()); // C
+console.log(iterator.next()); // done
+
+*/
+
+
+
+
+
+/*
+const str="Abhinav";
+
+console.log([...str]);
+
+for (let indx in str){
+    console.log(`${indx}:${str[indx]}`);
+}
+
+for(let ch of str){
+    console.log(ch);
+}
+*/
+
+//⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️ L-358 Introduction to Generators ⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+/*
+    🔥 The execution of a generator function doesn't start at
+       the time of calling the function.
+    
+    🔥 yeild ==> similar to a return but not a return 
+*/
+
+/*
+function* numbers(){
+    yield 1;
+    yield 2;
+    yield 3;
+}
+
+const gen=numbers();
+
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+
+*/
+
+/*
+function* test() {
+  yield 1;
+  return 2;
+  yield 3; // ❌ never runs
+}
+
+const gen1=test();
+
+console.log(gen1.next());
+console.log(gen1.next());
+console.log(gen1.next());
+console.log(gen1.next());
+*/
+
+
+
+/*
+function* letters(){
+    yield "A";
+    yield "B";
+    yield "C";
+}
+
+
+for(let ch of letters()){
+    console.log(ch);
+}
+*/
+
+
+/*
+function* fetchNextElement(){
+    console.log("Inside generator");
+    const x=10;
+    yield 11;
+    console.log("entering after a yeild");
+    const y=x+(yield 30);  // x+12 ==> yeild replace with argument in next(12)
+    console.log("value of y is",y);
+    yield 56;
+}
+
+
+console.log("start");
+
+const iter=fetchNextElement();
+
+console.log("called generator");
+
+console.log("first",iter.next());
+console.log("second",iter.next());
+console.log("third",iter.next(12));
+console.log("fourth",iter.next());
+*/
+
+// ⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️ L-362 (Integrating generators with promises)⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️
+
+
+function download(url){
+    return new Promise(function exec(resolve,reject){
+        console.log("starting to download data from",url);
+        setTimeout(function down(){
+            console.log("Downloading Completed");
+            const content="ABCDEF" // assume dummy download content
+            resolve(content);
+        }, 6000);
+    });
+
+}
+
+function writeFile(data){
+    return new Promise(function exec(resolve,reject){
+        console.log("started writing a file with",data);
+        setTimeout(function write(){
+            console.log("completed writing the data in a file");
+            const filename="file.txt";
+            resolve(filename);
+        },5000);
+    });
+}
+
+function uploadData(file,url){
+    return new Promise(function exec(resolve,reject){
+        console.log("satrted uploading",file,"on",url);
+        setTimeout(function up(){
+            console.log("upload completed");
+            const response="SUCCESS";
+            resolve(response);
+        }, 5000);
+    });
+}
+
+function doAfterReceiving(value){
+    let future=iter.next(value);
+    console.log("future is",future);
+    if(future.done) return;
+    future.value.then(doAfterReceiving);
+}
+
+
+function* steps(){
+    const downloadedData=yield download("www.xyz.com");
+    console.log("data downloaded is",downloadedData);
+    const fileWritten=yield writeFile(downloadedData);
+    console.log("file written is",fileWritten);
+    const uploadResponse=yield uploadData(fileWritten,"www.google.com");
+    console.log("upload response is",uploadResponse);
+    return uploadResponse;
+}
+
+const iter=steps();
+
+const future=iter.next();
+
+future.value.then(doAfterReceiving);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

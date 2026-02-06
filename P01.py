@@ -42,3 +42,42 @@ print(parity)"""
 (5, 0) (5, 1) (5, 2) (5, 3) (5, 4) (5, 5) (5, 6) 
 (6, 0) (6, 1) (6, 2) (6, 3) (6, 4) (6, 5) (6, 6) 
 """
+
+"""
+student={
+    "name":"Abhinav",
+    "marks":{
+        "maths":33,
+        "snw":47,
+        "physics":30
+    },
+    "place":"Bangalore"
+
+}
+
+print(student["name"])
+
+print(student["marks"]["physics"])
+
+s=input()
+
+freq={}
+
+for ch in s:
+    if ch not in freq:
+        freq[ch]=1
+    else:
+        freq[ch]+=1
+
+maxi=0
+ans=""
+
+for key,value in freq.items():
+    if value>maxi:
+        maxi=value
+        ans=key
+print(ans)
+"""
+
+"""s=input().split()
+print(s)"""
