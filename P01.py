@@ -81,3 +81,11 @@ print(ans)
 
 """s=input().split()
 print(s)"""
+
+
+total=0
+
+total-=12
+
+print(total)
+
