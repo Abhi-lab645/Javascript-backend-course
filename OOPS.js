@@ -604,7 +604,7 @@ console.log(calculateTotal(100,0.18));
  */
 
 
-
+/*
 function calculateTotal(price,tax){
     return price+price*tax;
 }
@@ -613,7 +613,7 @@ calculateTotal.version="1.0";
 
 
 console.log(calculateTotal.version);
-
+*/
 
 
 
@@ -638,6 +638,8 @@ console.log(User.prototype.__proto__===Function.prototype.__proto__);
 */
 
 
+
+/*
 console.log(Object.__proto__===Function.__proto__);
 
 console.log(Object.__proto__===Function.prototype);
@@ -668,6 +670,15 @@ console.log(Object.prototype);
 
 console.log(u1.__proto__.__proto__.__proto__);
 
+
+
+console.log(Object.__proto__===Function.prototype);
+
+console.log(Function.__proto__==Function.prototype);
+
+
+console.log(Function.prototype.__proto__===Object.prototype);
+*/
 
 
 
